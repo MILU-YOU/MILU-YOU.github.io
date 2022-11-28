@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title>第三篇文章</title>
-      <link href="/2022/11/27/%E7%AC%AC%E4%B8%89%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2022/11/27/%E7%AC%AC%E4%B8%89%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+      <title>算法笔记</title>
+      <link href="/2022/11/28/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/11/28/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -17,12 +17,18 @@
     
     
     <entry>
-      <title>第一篇文章</title>
-      <link href="/2022/11/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2022/11/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+      <title>java笔记</title>
+      <link href="/2022/11/28/java%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/11/28/java%E7%AC%94%E8%AE%B0/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="测试测试"><a href="#测试测试" class="headerlink" title="测试测试"></a>测试测试</h1><h2 id="二级标题测试"><a href="#二级标题测试" class="headerlink" title="二级标题测试"></a>二级标题测试</h2><p>白日依山尽，<br>黄河入海流。<br>欲穷千里目，<br>更上一层楼。  </p>]]></content>
       
+      
+      <categories>
+          
+          <category> java相关 </category>
+          
+      </categories>
       
       
     </entry>
@@ -30,13 +36,25 @@
     
     
     <entry>
-      <title>第二篇文章</title>
-      <link href="/2022/11/26/%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2022/11/26/%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+      <title>博客搭建完成！</title>
+      <link href="/2022/11/28/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%AE%8C%E6%88%90%EF%BC%81/"/>
+      <url>/2022/11/28/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%AE%8C%E6%88%90%EF%BC%81/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="测试测试"><a href="#测试测试" class="headerlink" title="测试测试"></a>测试测试</h1><h2 id="二级标题测试"><a href="#二级标题测试" class="headerlink" title="二级标题测试"></a>二级标题测试</h2><p>白日依山尽，<br>黄河入海流。<br>欲穷千里目，<br>更上一层楼。  </p><p>  测试markdown的分段功能，段前空两格<br>后面俩字<strong>加黑</strong><br>后面俩字<em>斜体</em></p><ul><li>苹果</li><li>葡萄</li><li>榴莲</li></ul><ol><li>苹果</li><li>葡萄</li><li>榴莲</li></ol>]]></content>
       
       
+      <categories>
+          
+          <category> dailylife </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> test </tag>
+            
+        </tags>
       
     </entry>
     
@@ -57,9 +75,9 @@
     
     
     <entry>
-      <title>友链</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -73,6 +91,17 @@
       <url>/css/custom.css</url>
       
         <content type="html"><![CDATA[/* 页脚与头图透明 */#footer {    background: transparent !important;  }  #page-header {    background: transparent !important;  }    /* 白天模式遮罩透明 */  #footer::before {    background: transparent !important;  }  #page-header::before {    background: transparent !important;  }    /* 夜间模式遮罩透明 */  [data-theme="dark"] #footer::before {    background: transparent !important;  }  [data-theme="dark"] #page-header::before {    background: transparent !important;  }]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友链</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
