@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mybatis常用标签</title>
+      <link href="/2023/02/03/Mybatis%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/"/>
+      <url>/2023/02/03/Mybatis%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</url>
+      
+        <content type="html"><![CDATA[<p>做项目时遇到的，以前学过但是又忘了，在此巩固一下</p><h2 id="1-lt-sql-gt-标签"><a href="#1-lt-sql-gt-标签" class="headerlink" title="1.&lt;sql&gt;标签"></a>1.&lt;sql&gt;标签</h2><p>重复的SQL预计永远不可避免，标签就是用来解决这个问题的</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;sql id=&quot;sql1&quot;&gt;id,name,age,gender&lt;/sql&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=&quot;getPerson&quot; parameterType=&quot;int&quot; resultType=&quot;orm.Person&quot;&gt;</span><br><span class="line">    select </span><br><span class="line">    &lt;include refid=&quot;sql1&quot;&gt;&lt;/include&gt;</span><br><span class="line">     from Person where id=#&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure><p>&lt; sql &gt;:定义重复代码</p><p>id：sql代码块的名称</p><p>&lt; include &gt;：引用sql代码</p><p>refid:需要应用sql代码块的id</p><h2 id="2-lt-if-gt-和-lt-where-gt-标签"><a href="#2-lt-if-gt-和-lt-where-gt-标签" class="headerlink" title="2.&lt;if&gt;和&lt;where&gt;标签"></a>2.&lt;if&gt;和&lt;where&gt;标签</h2><p>查询sql语句:</p><blockquote><p>SELECT id, username, birthday, sex, address FROM <code>user</code> WHERE sex &#x3D; 1 AND username LIKE ‘%张%’</p></blockquote><p>mybatis动态sql：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 根据条件查询用户 --&gt;</span><br><span class="line">&lt;select id=&quot;queryUserByWhere&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;</span><br><span class="line">SELECT id, username, birthday, sex, address FROM `user`</span><br><span class="line">&lt;!-- where标签可以自动添加where，同时处理sql语句中第一个and关键字 --&gt;</span><br><span class="line">&lt;where&gt;</span><br><span class="line">&lt;if test=&quot;sex != null&quot;&gt;</span><br><span class="line">AND sex = #&#123;sex&#125;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;username != null and username != &#x27;&#x27;&quot;&gt;</span><br><span class="line">AND username LIKE</span><br><span class="line">&#x27;%$&#123;username&#125;%&#x27;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure><h2 id="3-lt-foreach-gt-标签"><a href="#3-lt-foreach-gt-标签" class="headerlink" title="3.&lt;foreach&gt;标签"></a>3.&lt;foreach&gt;标签</h2><p>Mybatis foreach 标签用于循环语句，它很好的支持了数据和 List、set 接口的集合，并对此提供遍历的功能。语法格式如下。</p><blockquote><p>&lt;foreach item&#x3D;”item” index&#x3D;”index” collection&#x3D;”list|array|map key” open&#x3D;”(“ separator&#x3D;”,” close&#x3D;”)”&gt;<br>    参数值<br>&lt;&#x2F;foreach&gt;</p></blockquote><p>foreach 标签主要有以下属性，说明如下。</p><ul><li>item：表示集合中每一个元素进行迭代时的别名。</li><li>index：指定一个名字，表示在迭代过程中每次迭代到的位置。</li><li>open：表示该语句以什么开始（既然是 in 条件语句，所以必然以(开始）。</li><li>separator：表示在每次进行迭代之间以什么符号作为分隔符（既然是 in 条件语句，所以必然以,作为分隔符）。</li><li>close：表示该语句以什么结束（既然是 in 条件语句，所以必然以)开始）。</li></ul><p>使用 foreach 标签时，最关键、最容易出错的是 collection 属性，该属性是必选的，但在不同情况下该属性的值是不一样的，主要有以下 3 种情况：</p><ul><li>如果传入的是单参数且参数类型是一个 List，collection 属性值为 list。</li><li>如果传入的是单参数且参数类型是一个 array 数组，collection 的属性值为 array。</li><li>如果传入的参数是多个，需要把它们封装成一个 Map，当然单参数也可以封装成 Map。Map 的 key 是参数名，collection 属性值是传入的 List 或 array 对象在自己封装的 Map 中的 key。</li></ul><p>例如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectWebsite&quot;</span><br><span class="line">    parameterType=&quot;net.biancheng.po.Website&quot;</span><br><span class="line">    resultType=&quot;net.biancheng.po.Website&quot;&gt;</span><br><span class="line">    SELECT id,name,url,age,country</span><br><span class="line">    FROM website WHERE age in</span><br><span class="line">    &lt;foreach item=&quot;age&quot; index=&quot;index&quot; collection=&quot;list&quot; open=&quot;(&quot;</span><br><span class="line">        separator=&quot;,&quot; close=&quot;)&quot;&gt;</span><br><span class="line">        #&#123;age&#125;</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mybatis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RESTful风格知识巩固</title>
       <link href="/2023/02/02/RESTful%E9%A3%8E%E6%A0%BC%E7%9F%A5%E8%AF%86%E5%B7%A9%E5%9B%BA/"/>
       <url>/2023/02/02/RESTful%E9%A3%8E%E6%A0%BC%E7%9F%A5%E8%AF%86%E5%B7%A9%E5%9B%BA/</url>
